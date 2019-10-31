@@ -3,23 +3,18 @@ package com.example.wardrobe;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.wardrobe.info.User;
 
-import org.w3c.dom.Text;
-
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView wardrobeView, newView;
-    private LinearLayout meView;
     private User user;
     private static Logger logger = Logger.getLogger(MainActivity.class.getCanonicalName());
 
@@ -30,47 +25,48 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_wardrobe:
-                    newView.setVisibility(View.GONE);
-                    meView.setVisibility(View.GONE);
-                    wardrobeView.setVisibility(View.VISIBLE);
+                    replaceFragment(new WardrobeFragment());
                     return true;
                 case R.id.navigation_new:
-                    wardrobeView.setVisibility(View.GONE);
-                    meView.setVisibility(View.GONE);
-                    newView.setVisibility(View.VISIBLE);
+                    replaceFragment(new NewFragment());
                     return true;
                 case R.id.navigation_me:
-                    wardrobeView.setVisibility(View.GONE);
-                    newView.setVisibility(View.GONE);
-                    meView.setVisibility(View.VISIBLE);
+                    replaceFragment(new MeFragment());
                     return true;
             }
             return false;
         }
     };
 
-    private void initializeUser(){
-        user = new User("David","123456","123456@qq.com");
-    }
-
-    private void initializeView(){
-        wardrobeView = findViewById(R.id.wardrobe_view);
-        newView = findViewById(R.id.new_view);
-        meView = findViewById(R.id.me_view);
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initializeUser();
         initializeView();
-        TextView userDescription = findViewById(R.id.me_description);
+    }
+
+    private void initializeUser(){
+        user = new User("David","123456","123456@qq.com");
+    }
+
+    String getUserDescription(){
         String delimiter = (user.username == null || user.email == null )? "":", ";
-        String description = user.username + delimiter + user.email;
-        userDescription.setText(description);
-        logger.log(Level.INFO,description);
+        String description = new StringBuilder().append(user.username).append(delimiter).append(user.email).toString();
+        return description;
+    }
+
+    private void initializeView(){
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        replaceFragment(new WardrobeFragment());
+    }
+
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.frame,fragment);
+        transaction.commit();
     }
 
 }

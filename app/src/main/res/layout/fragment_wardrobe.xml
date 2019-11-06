@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-=======
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
->>>>>>> 82030bc8beb3be4362ef8da28e990d10dd5ca070
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WardrobeFragment">
-<<<<<<< HEAD
+
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView
@@ -17,14 +15,4 @@
         android:id="@+id/clothes_recycler_view"/>
 
 </FrameLayout>
-=======
-    <TextView
-        android:id="@+id/wardrobe_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="@string/title_wardrobe"/>
-</LinearLayout>
->>>>>>> 82030bc8beb3be4362ef8da28e990d10dd5ca070
+

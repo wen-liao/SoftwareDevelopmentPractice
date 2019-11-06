@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/list_item_size"
         android:gravity="center"
-        android:layout_below="@id/list_item_brand"/>
+        />
     </LinearLayout>
 
 </RelativeLayout>

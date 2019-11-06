@@ -1,5 +1,4 @@
 package com.example.wardrobe;
-<<<<<<< HEAD
 import com.example.wardrobe.info.Clothes;
 import com.example.wardrobe.info.ClothesManager;
 import android.content.Intent;
@@ -16,15 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
-=======
-
-
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
->>>>>>> 82030bc8beb3be4362ef8da28e990d10dd5ca070
 
 
 /**
@@ -33,18 +23,14 @@ import android.view.ViewGroup;
 public class WardrobeFragment extends Fragment {
 
 
-<<<<<<< HEAD
     private RecyclerView mRecyclerView;
     private ClothesAdapter mAdapter;
 
 
-=======
->>>>>>> 82030bc8beb3be4362ef8da28e990d10dd5ca070
     public WardrobeFragment() {
         // Required empty public constructor
     }
 
-<<<<<<< HEAD
     private class ClothesHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private Clothes mClothes;
@@ -102,14 +88,11 @@ public class WardrobeFragment extends Fragment {
         }
     }
 
-=======
->>>>>>> 82030bc8beb3be4362ef8da28e990d10dd5ca070
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-<<<<<<< HEAD
 
         View view = inflater.inflate(R.layout.fragment_wardrobe,container,false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.clothes_recycler_view);
@@ -131,9 +114,3 @@ public class WardrobeFragment extends Fragment {
 
 }
 
-=======
-        return inflater.inflate(R.layout.fragment_wardrobe, container, false);
-    }
-
-}
->>>>>>> 82030bc8beb3be4362ef8da28e990d10dd5ca070

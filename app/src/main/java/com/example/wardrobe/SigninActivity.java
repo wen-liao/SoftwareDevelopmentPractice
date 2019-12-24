@@ -1,6 +1,7 @@
 package com.example.wardrobe;
 
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -31,11 +32,14 @@ import java.net.URL;
 
 public class SigninActivity extends AppCompatActivity {
 
+    public static final String EXTRA_USERNAME = "com.example.wardrobe.signin.username";
+    public static final String EXTRA_PASSWORD = "com.example.wardrobe.signin.password";
+
     private String username,passwd,md5passwd;
     private EditText usrnameInput,passwdInput;
     private Button loginButton;
 
-    private String TAG = "SigninActivtity";
+    private String TAG = "login";
 
     public static final boolean DEVELOPER_MODE = BuildConfig.DEBUG;
 
@@ -104,9 +108,28 @@ public class SigninActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Toast.makeText(SigninActivity.this,"connecting..",Toast.LENGTH_SHORT).show();
+
+                usrnameInput.setEnabled(false);
+                passwdInput.setEnabled(false);
+
                 boolean result = loginResult(username,passwd);
 
 
+                Log.e(TAG,String.valueOf(result));
+                if(result){
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    intent.putExtra(EXTRA_USERNAME, username);
+                    intent.putExtra(EXTRA_USERNAME, username);
+
+                    startActivity(intent);
+                    finish();
+                }
+
+
+                usrnameInput.setEnabled(true);
+                passwdInput.setEnabled(true);
             }
         });
 
@@ -125,7 +148,8 @@ public class SigninActivity extends AppCompatActivity {
             if(response != null) {
                 String status = response.getString("status");
                 Toast.makeText(SigninActivity.this,response.getString("message"),Toast.LENGTH_SHORT).show();
-                if(status == "000") return true;
+
+                if(status.equals("000")) return true;
             }
         }
         catch (Exception e){

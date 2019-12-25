@@ -1,13 +1,16 @@
 package com.example.wardrobe.info;
 
-public class User {
-    public String username;
-    public String user_id;
-    public String email;
+import android.graphics.Bitmap;
 
-    public User(String username,String user_id, String email){
+public class User {
+
+    public String username;
+    public String nickname;
+    public String icon;
+
+    public User(String username,String nickname,String a){
         this.username = username;
-        this.user_id = user_id;
-        this.email = email;
+        this.nickname = nickname;
+        this.icon = a;
     }
 }

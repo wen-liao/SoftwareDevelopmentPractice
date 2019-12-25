@@ -54,7 +54,7 @@ public class ClothesManager {
                 return a;
         return null;
     }
-    public List<Clothes> fiteredWardrobe(String constraintType, String constraintValue){
+    public List<Clothes> filteredWardrobe(String constraintType, String constraintValue){
 
         List<Clothes> tmp = new ArrayList<>();
         switch (constraintType){

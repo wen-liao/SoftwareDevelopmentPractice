@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
@@ -7,9 +8,14 @@
         android:title="@string/title_wardrobe" />
 
     <item
-        android:id="@+id/navigation_new"
+        android:id="@+id/navigation_clothesList"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_new" />
+        android:title="@string/title_clothesList" />
+
+    <item
+        android:id="@+id/navigation_clothesCalendar"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_clothesCalendar" />
 
     <item
         android:id="@+id/navigation_me"

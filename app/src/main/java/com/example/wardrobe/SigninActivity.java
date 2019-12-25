@@ -157,7 +157,7 @@ public class SigninActivity extends AppCompatActivity {
             a.put("password", passwd);
 
             //connect to server
-            response = new netConnector("authentication/sign_in/", "POST", a).call();
+            response = new netConnector("authentication/sign_in", "POST", a).call();
 
             if(response != null) {
                 String status = response.getString("status");

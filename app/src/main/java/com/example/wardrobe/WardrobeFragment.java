@@ -7,12 +7,14 @@ import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,11 +39,13 @@ public class WardrobeFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private ClothesAdapter mAdapter;
+    ClothesManager cm;
+    List<Clothes> wardrobe;
 
 
 
 
-    private class ClothesHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    private class ClothesHolder extends RecyclerView.ViewHolder {
 
         private Clothes mClothes;
 
@@ -50,8 +54,6 @@ public class WardrobeFragment extends Fragment {
 
         public ClothesHolder(View itemView){
             super(itemView);
-
-            itemView.setOnClickListener(this);
         }
 
         public void bindClothes(Clothes clothes){
@@ -59,12 +61,6 @@ public class WardrobeFragment extends Fragment {
 
         }
 
-        @Override
-        public void onClick(View v){
-            //Toast.makeText(getActivity(),mClothes.getID() + " Clicked! ",Toast.LENGTH_SHORT).show();
-            //Intent intent = DetailedActivity.newIntent(getActivity(),mClothes.getID());
-            //startActivity(intent);
-        }
     }
 
     private class ClothesAdapter extends RecyclerView.Adapter<ClothesHolder>{
@@ -102,8 +98,28 @@ public class WardrobeFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_wardrobe,container,false);
+
+        cm = ClothesManager.get(getActivity());
+        wardrobe = cm.getWardrobe();
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.clothes_recycler_view);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
+
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getContext(),wardrobe.get(position).getBrand(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                Toast.makeText(getContext(),"long "+wardrobe.get(position).getBrand(),Toast.LENGTH_SHORT).show();
+                // ...
+            }
+        }));
+
+        LinearLayoutManager lm = new LinearLayoutManager(getActivity());
+        lm.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mRecyclerView.setLayoutManager(lm);
 
         updateUI();
 
@@ -112,8 +128,8 @@ public class WardrobeFragment extends Fragment {
     }
 
     private void updateUI(){
-        ClothesManager cm = ClothesManager.get(getActivity());
-        List<Clothes> wardrobe = cm.getWardrobe();
+        cm = ClothesManager.get(getActivity());
+        wardrobe = cm.getWardrobe();
 
         mAdapter = new ClothesAdapter(wardrobe);
         mRecyclerView.setAdapter(mAdapter);

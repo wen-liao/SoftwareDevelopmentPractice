@@ -5,28 +5,21 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <android.support.v7.widget.AppCompatImageView
 
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:src="@drawable/testicon"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
 
         />
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/list_item_brand"
-        android:gravity="center"
-        />
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/list_item_size"
-        android:gravity="center"
-        />
+
     </LinearLayout>
 
 </RelativeLayout>

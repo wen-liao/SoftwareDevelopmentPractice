@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,8 +50,6 @@ public class WardrobeFragment extends Fragment {
 
         public ClothesHolder(View itemView){
             super(itemView);
-            mBrandTextView = (TextView) itemView.findViewById(R.id.list_item_brand);
-            mSizeTextView = (TextView) itemView.findViewById(R.id.list_item_size);
 
             itemView.setOnClickListener(this);
         }
@@ -58,8 +57,6 @@ public class WardrobeFragment extends Fragment {
         public void bindClothes(Clothes clothes){
             mClothes = clothes;
 
-            mBrandTextView.setText(mClothes.getBrand());
-            mSizeTextView.setText(mClothes.getSize());
         }
 
         @Override

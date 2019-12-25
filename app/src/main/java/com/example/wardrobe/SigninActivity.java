@@ -147,6 +147,7 @@ public class SigninActivity extends AppCompatActivity {
 
     }
 
+
     private boolean loginResult(String un, String pw){
         JSONObject response = null;
         //build json requests
@@ -154,6 +155,7 @@ public class SigninActivity extends AppCompatActivity {
             JSONObject a = new JSONObject();
             a.put("username", username);
             a.put("password", passwd);
+
             //connect to server
             response = new netConnector("authentication/sign_in/", "POST", a).call();
 

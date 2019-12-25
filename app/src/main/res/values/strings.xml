@@ -1,19 +1,26 @@
 <resources>
     <string name="app_name">Wardrobe</string>
-    <string name="title_wardrobe">Wardrobe</string>
-    <string name="title_new">New</string>
-    <string name="title_me">Me</string>
+    <string name="title_wardrobe">我的衣柜</string>
+    <string name="title_clothesList">衣物管理</string>
+    <string name="title_clothesCalendar">搭配日历</string>
+    <string name="title_me">个人中心</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_login">Sign in</string>
-    <string name="prompt_email">Email</string>
+    <string name="title_activity_login">欢迎！</string>
+    <string name="title_activity_signUp">注册</string>
+    <string name="prompt_email">Username</string>
+    <string name="prompt_nickname">Nickname</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_signUp">注册</string>
+    <string name="action_login">登录</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="title_app">衣橱管家</string>
+    <string name="title_sign_up">注册</string>
+    <string name="sign_up_return">返回</string>
+    <string name="sign_up_submit">提交</string>
 </resources>

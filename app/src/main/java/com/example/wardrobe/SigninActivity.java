@@ -37,7 +37,7 @@ public class SigninActivity extends AppCompatActivity {
 
     private String username,passwd,md5passwd;
     private EditText usrnameInput,passwdInput;
-    private Button loginButton;
+    private Button loginButton,signupButton;
 
     private String TAG = "login";
 
@@ -60,6 +60,7 @@ public class SigninActivity extends AppCompatActivity {
                 .build());
 
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_signin);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         init();
@@ -130,6 +131,17 @@ public class SigninActivity extends AppCompatActivity {
 
                 usrnameInput.setEnabled(true);
                 passwdInput.setEnabled(true);
+            }
+        });
+
+        signupButton = (Button) findViewById(R.id.signUp);
+
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

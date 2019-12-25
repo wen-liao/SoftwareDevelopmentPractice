@@ -1,6 +1,7 @@
 package com.example.wardrobe.info;
 
 public class User {
+
     public String username;
     public String user_id;
     public String email;

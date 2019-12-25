@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String EXTRA_USERNAME = "com.example.wardrobe.signin.username";
+
     private User user;
     private static Logger logger = Logger.getLogger(MainActivity.class.getCanonicalName());
 
@@ -27,8 +29,11 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_wardrobe:
                     replaceFragment(new WardrobeFragment());
                     return true;
-                case R.id.navigation_new:
-                    replaceFragment(new NewFragment());
+                case R.id.navigation_clothesList:
+                    replaceFragment(new ClothesListFragment());
+                    return true;
+                case R.id.navigation_clothesCalendar:
+                    replaceFragment(new ClothesListFragment());
                     return true;
                 case R.id.navigation_me:
                     replaceFragment(new MeFragment());
@@ -47,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeUser(){
+
+        Bundle extras = getIntent().getExtras();
+        String username = extras.getString(EXTRA_USERNAME);
         user = new User("David","123456","123456@qq.com");
     }
 

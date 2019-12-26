@@ -14,11 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".SelectPhotosActivity"></activity>
+        <activity android:name=".SignUpActivity" />
         <activity
             android:name=".SigninActivity"
             android:label="@string/title_activity_login">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,10 +28,7 @@
         <activity android:name=".DetailedActivity" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
-
-        </activity>
-
+            android:label="@string/app_name"></activity>
     </application>
 
 </manifest>

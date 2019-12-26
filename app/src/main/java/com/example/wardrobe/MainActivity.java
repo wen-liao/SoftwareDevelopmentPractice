@@ -23,10 +23,11 @@ import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String EXTRA_USERNAME = "com.example.wardrobe.signin.username";
+    public static final String EXTRA_USERNAME = "com.example.wardrobe.username";
 
     private User user;
     private static Logger logger = Logger.getLogger(MainActivity.class.getCanonicalName());
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -128,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        navigation.setItemIconTintList(null);
         replaceFragment(new WardrobeFragment());
     }
 

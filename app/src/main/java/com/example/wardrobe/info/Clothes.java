@@ -6,11 +6,22 @@ import java.util.Date;
 
 public class Clothes {
     private int mID;
+
+    public String getOwner() {
+        return mOwner;
+    }
+
+    public void setOwner(String owner) {
+        mOwner = owner;
+    }
+
+    private String mOwner;
     private int mUsageCount;
     private String mBrand;
     private String mCategory;
     private String mSize;
     private String mColor;
+    private Bitmap mBitmap;
 
     public Bitmap getBitmap() {
         return mBitmap;
@@ -20,7 +31,7 @@ public class Clothes {
         mBitmap = bitmap;
     }
 
-    private Bitmap mBitmap;
+
 
     //String pic;
     Clothes(){
@@ -32,8 +43,9 @@ public class Clothes {
         setColor("null");
         setBitmap(null);}
 
-    public Clothes(int ID, int usageCount, String brand, String category, String size,String color,Bitmap bm){
+    public Clothes(int ID, int usageCount, String owner,String brand, String category, String size,String color,Bitmap bm){
         setID(ID);
+        setOwner(owner);
         setUsageCount(usageCount);
         setBrand(brand);
         setCategory(category);

@@ -43,12 +43,12 @@ public class MeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_me, container, false);
         MainActivity activity = (MainActivity)getActivity();
         TextView textView = view.findViewById(R.id.me_username);
-        textView.setText(activity.getUsername());
-        TextView textView1 = view.findViewById(R.id.me_nickname);
-        textView1.setText(activity.getNickname());
+
+
+
         CircleImageView im = (CircleImageView) view.findViewById(R.id.profile_image);
         try{
-        Bitmap a = imageService.getImage(activity.getUserIconURL());
+        Bitmap a = activity.getUserIcon();
         im.setImageBitmap(a);}
         catch (Exception e){
             e.printStackTrace();
@@ -56,7 +56,10 @@ public class MeFragment extends Fragment {
 
         final String username = activity.getUsername();
 
+
+
         Button logout = (Button) view.findViewById(R.id.me_signout);
+        textView.setText(activity.getUsername());
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

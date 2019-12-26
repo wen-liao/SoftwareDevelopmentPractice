@@ -117,13 +117,15 @@ public class WardrobeFragment extends Fragment {
         // Inflate the layout for this fragment
 
 
-        cm = ClothesManager.get(getActivity());
+        cm = ((MainActivity) (getParentFragment().getActivity())).mClothesManager;
+        System.out.println(cm);
+
         wardrobe = cm.filteredWardrobe(new ArrayList());
 
         if(cm.isExtended() == false) {
 
             Bitmap bitmap = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.edit);
-            Clothes extend = new Clothes(-1, -1, null, null, null, null, bitmap);
+            Clothes extend = new Clothes(-1, -1,"tester", null, null, null, null, bitmap);
             wardrobe.add(extend);
             cm.setExtended(true);
         }
@@ -170,7 +172,7 @@ public class WardrobeFragment extends Fragment {
     private int extendPlusIcon(){
 
         Bitmap bitmap = BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.edit);
-        Clothes extend = new Clothes(-1,-1,null,null,null,null,bitmap);
+        Clothes extend = new Clothes(-1,-1,"tester",null,null,null,null,bitmap);
         wardrobe.add(extend);
         return 1;
     }

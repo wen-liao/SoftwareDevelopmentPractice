@@ -2,6 +2,7 @@ package com.example.wardrobe;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import com.example.wardrobe.info.ClothesManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -16,18 +18,22 @@ import android.widget.Toast;
 import com.example.wardrobe.info.User;
 import com.example.wardrobe.network.netConnector;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String EXTRA_USERNAME = "com.example.wardrobe.username";
+    public static final String EXTRA_USERNAME = "com.example.wardrobe.signin.username";
+    public static final String EXTRA_PASSWORD = "com.example.wardrobe.signin.password";
 
     private User user;
     private static Logger logger = Logger.getLogger(MainActivity.class.getCanonicalName());
 
+    public ClothesManager mClothesManager;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -36,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_wardrobe:
-                    replaceFragment(new WardrobeFragment());
+                    replaceFragment(new ClosetFragment());
                     return true;
                 case R.id.navigation_clothesList:
                     replaceFragment(new ClothesListFragment());
@@ -57,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+        updateCMdebug();
         initializeUser();
         initializeView();
     }
@@ -65,8 +72,9 @@ public class MainActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         String username = extras.getString(EXTRA_USERNAME);
-        String iconpic = null;
-        String nickname = null;
+        Bitmap iconpic = null;
+
+
         //connect to server for user description
         //todo: further edit need
         //JSONObject response = null;
@@ -82,14 +90,12 @@ public class MainActivity extends AppCompatActivity {
             //todo: convert hardcoded json to server response
             //response = new netConnector("authentication/user_info/", "GET", a).call();
 
-            Log.e("user","json");
-            response.put("nickname","tester");
-            response.put("iconpic","https://img2.woyaogexing.com/2019/12/24/e931747093e64f1583d90cb8f911d8c3!400x400.jpeg");
-            Log.e("user","json success");
+            Bitmap bitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.nullpic);
 
-            nickname = response.getString("nickname");
-            Log.e("user","json nickname"+ " "+nickname);
-            iconpic = response.getString("iconpic");
+            response.put("iconpic",BitMapToString(bitmap));
+
+
+            iconpic = StringToBitMap(response.getString("iconpic"));
             /*
             if(response != null) {
                 String nickname = response.getString("nickname");
@@ -103,25 +109,19 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Log.e("user","nickname "+nickname);
-        user = new User(username,nickname,iconpic);
+
+        user = new User(username,iconpic);
+        Log.e("calendar","user+ "+username);
     }
 
-    String getUserDescription(){
-        Log.e("user",user.username+" "+user.nickname);
-        String delimiter = (user.username == null || user.nickname == null )? "":", ";
-        String description = new StringBuilder().append(user.username).append(delimiter).append(user.nickname).toString();
-        return description;
-    }
+
 
     String getUsername(){
         return user.username;
     }
-    String getNickname(){
-        return user.nickname;
-    }
 
-    String getUserIconURL(){
+
+    Bitmap getUserIcon(){
         return user.icon;
     }
 
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         navigation.setItemIconTintList(null);
-        replaceFragment(new WardrobeFragment());
+        replaceFragment(new ClosetFragment());
     }
 
     private void replaceFragment(Fragment fragment){
@@ -138,6 +138,63 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frame,fragment);
         transaction.commit();
+    }
+
+    public void updateCMfromServer(JSONArray li){
+
+        mClothesManager.loadFromJSON(li);
+
+
+    }
+    public void updateCMdebug(){
+        mClothesManager = new ClothesManager(getApplicationContext(),1);
+    }
+
+
+    private JSONArray getFullClothesResult(){
+        JSONObject response = null;
+        //build json requests
+        try {
+            JSONObject a = new JSONObject();
+            a.put("username", user.username);
+
+
+
+            //connect to server
+            response = new netConnector("clothes_management/get_clothes", "GET", a).call();
+
+            if(response != null) {
+                String status = response.getString("status");
+                //Toast.makeText(SignUpActivity.this,response.getString("message"),Toast.LENGTH_SHORT).show();
+
+                if(status.equals("000")) return response.getJSONObject("data").getJSONArray("clothes");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return  null;
+    }
+
+
+    public String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }
+
+    public Bitmap StringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte=Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 
 

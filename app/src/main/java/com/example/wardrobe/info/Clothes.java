@@ -1,5 +1,7 @@
 package com.example.wardrobe.info;
 
+import android.graphics.Bitmap;
+
 import java.util.Date;
 
 public class Clothes {
@@ -10,6 +12,16 @@ public class Clothes {
     private String mSize;
     private String mColor;
 
+    public Bitmap getBitmap() {
+        return mBitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        mBitmap = bitmap;
+    }
+
+    private Bitmap mBitmap;
+
     //String pic;
     Clothes(){
         setID(-1);
@@ -17,15 +29,17 @@ public class Clothes {
         setBrand("null");
         setCategory("null");
         setSize("null");
-        setColor("null");    }
+        setColor("null");
+        setBitmap(null);}
 
-    Clothes(int ID, int usageCount, String brand, String category, String size,String color){
+    public Clothes(int ID, int usageCount, String brand, String category, String size,String color,Bitmap bm){
         setID(ID);
         setUsageCount(usageCount);
         setBrand(brand);
         setCategory(category);
         setSize(size);
         setColor(color);
+        setBitmap(bm);
     }
 
     public int getID() {

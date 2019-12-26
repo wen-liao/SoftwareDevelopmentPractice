@@ -24,4 +24,6 @@
     <string name="sign_up_return">返回</string>
     <string name="sign_up_submit">提交</string>
     <string name="me_sign_out">注销账号</string>
+    <string name="calendar_hint">衣物搭配</string>
+    <string name="container_wear_history">container</string>
 </resources>

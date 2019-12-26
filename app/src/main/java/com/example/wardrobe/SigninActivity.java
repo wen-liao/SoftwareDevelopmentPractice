@@ -121,8 +121,9 @@ public class SigninActivity extends AppCompatActivity {
                 Log.e(TAG,String.valueOf(result));
                 if(result){
                     Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                    intent.putExtra(EXTRA_USERNAME, username);
-                    intent.putExtra(EXTRA_USERNAME, username);
+
+                    intent.putExtra(EXTRA_USERNAME, "David");
+
 
                     startActivity(intent);
                     finish();
@@ -157,7 +158,7 @@ public class SigninActivity extends AppCompatActivity {
             a.put("password", passwd);
 
             //connect to server
-            response = new netConnector("authentication/sign_in/", "POST", a).call();
+            response = new netConnector("authentication/sign_in", "POST", a).call();
 
             if(response != null) {
                 String status = response.getString("status");
@@ -169,7 +170,9 @@ public class SigninActivity extends AppCompatActivity {
         catch (Exception e){
             e.printStackTrace();
         }
-        return  false;
+
+        //todo
+        return  true;
     }
 
 

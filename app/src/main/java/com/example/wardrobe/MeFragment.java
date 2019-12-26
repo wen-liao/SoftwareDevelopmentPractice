@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class MeFragment extends Fragment {
 
+    private String TAG = "me";
 
     public MeFragment() {
         // Required empty public constructor
@@ -83,10 +85,13 @@ public class MeFragment extends Fragment {
             a.put("username", un);
 
             //connect to server
-            response = new netConnector("authentication/sign_out/", "POST", a).call();
+            response = new netConnector("authentication/sign_out", "POST", a).call();
 
+            Log.e(TAG,response.toString());
             if(response != null) {
                 String status = response.getString("status");
+
+                Log.e(TAG,status);
 
                 if(status.equals("000")) return true;
             }

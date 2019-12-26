@@ -31,7 +31,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/sign_up_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
+
+                android:hint="@string/prompt_email"
+
+                android:selectAllOnFocus="true"
+                />
 
             <EditText
                 android:id="@+id/sign_up_username"
@@ -41,10 +56,10 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="20dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="50dp"
 
-                android:hint="@string/prompt_email"
+                android:hint="@string/prompt_username"
                 android:inputType="textPostalAddress"
 
                 />
@@ -57,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="50dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="20dp"
@@ -68,22 +83,7 @@
             android:selectAllOnFocus="true"
             />
 
-        <EditText
-            android:id="@+id/sign_up_repasswd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="30dp"
 
-            android:hint="@string/prompt_repasswd"
-
-            android:inputType="textPassword"
-            android:selectAllOnFocus="true"
-            />
 
         <Button
             android:id="@+id/sign_up_submit"

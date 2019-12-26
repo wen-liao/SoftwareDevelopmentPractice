@@ -10,7 +10,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">欢迎！</string>
     <string name="title_activity_signUp">注册</string>
-    <string name="prompt_email">Username</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_username">Username</string>
     <string name="prompt_repasswd">Repeat your password</string>
     <string name="prompt_password">Password</string>
     <string name="action_signUp">注册</string>

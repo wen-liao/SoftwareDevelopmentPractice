@@ -34,9 +34,9 @@ public class SignUpActivity extends AppCompatActivity {
 
 
 
-    private String username,passwd,repasswd,md5passwd;
+    private String username,passwd,email,md5passwd;
 
-    private EditText usrnameInput,passwdInput,repasswdInput;
+    private EditText usrnameInput,emailInput,passwdInput;
     private Button submitButton,returnButton;
 
     private String TAG = "sign_up";
@@ -86,6 +86,24 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        emailInput = (EditText) findViewById(R.id.sign_up_email);
+        emailInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+               email = emailInput.getText().toString().trim();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         passwdInput = (EditText) findViewById(R.id.sign_up_password);
         passwdInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -104,24 +122,6 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        repasswdInput = (EditText) findViewById(R.id.sign_up_repasswd);
-        repasswdInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                repasswd = passwdInput.getText().toString().trim();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
 
 
         submitButton = (Button) findViewById(R.id.sign_up_submit);
@@ -129,12 +129,12 @@ public class SignUpActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(repasswd.equals(passwd)) {
+
                     Toast.makeText(SignUpActivity.this, "提交中..", Toast.LENGTH_SHORT).show();
 
                     usrnameInput.setEnabled(false);
                     passwdInput.setEnabled(false);
-                    repasswdInput.setEnabled(false);
+                    emailInput.setEnabled(false);
 
                     boolean result = signupResult(username, passwd);
 
@@ -150,15 +150,13 @@ public class SignUpActivity extends AppCompatActivity {
 
                         usrnameInput.setEnabled(true);
                         passwdInput.setEnabled(true);
-                        repasswdInput.setEnabled(true);
+                        emailInput.setEnabled(true);
                     }
                 }
-                else{
-                    Toast.makeText(getApplicationContext(),"两次输入的密码不一致！",Toast.LENGTH_SHORT).show();
-                }
 
 
-            }
+
+
         });
 
         returnButton = (Button) findViewById(R.id.sign_up_return);
@@ -181,7 +179,7 @@ public class SignUpActivity extends AppCompatActivity {
             JSONObject a = new JSONObject();
             a.put("username", username);
             a.put("password", passwd);
-
+            a.put("email",email);
 
             //connect to server
             response = new netConnector("authentication/register", "POST", a).call();

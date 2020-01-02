@@ -10,8 +10,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">欢迎！</string>
     <string name="title_activity_signUp">注册</string>
-    <string name="prompt_email">Username</string>
-    <string name="prompt_nickname">Nickname</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_repasswd">Repeat your password</string>
     <string name="prompt_password">Password</string>
     <string name="action_signUp">注册</string>
     <string name="action_login">登录</string>
@@ -26,4 +27,8 @@
     <string name="me_sign_out">注销账号</string>
     <string name="calendar_hint">衣物搭配</string>
     <string name="container_wear_history">container</string>
+    <string name="outfits">外套</string>
+    <string name="uppers">上装</string>
+    <string name="trousers">裤装</string>
+    <string name="shoes">鞋子</string>
 </resources>

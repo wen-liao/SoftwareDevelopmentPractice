@@ -122,7 +122,7 @@ public class SigninActivity extends AppCompatActivity {
                 if(result){
                     Intent intent = new Intent(getBaseContext(), MainActivity.class);
 
-                    intent.putExtra(EXTRA_USERNAME, "David");
+                    intent.putExtra(EXTRA_USERNAME,username);
 
 
                     startActivity(intent);
@@ -141,6 +141,7 @@ public class SigninActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
+
                 startActivity(intent);
                 finish();
             }
@@ -172,7 +173,7 @@ public class SigninActivity extends AppCompatActivity {
         }
 
         //todo
-        return  true;
+        return  false;
     }
 
 

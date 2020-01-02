@@ -5,12 +5,12 @@ import android.graphics.Bitmap;
 public class User {
 
     public String username;
-    public String nickname;
-    public String icon;
 
-    public User(String username,String nickname,String a){
+    public Bitmap icon;
+
+    public User(String username,Bitmap a){
         this.username = username;
-        this.nickname = nickname;
+
         this.icon = a;
     }
 }

@@ -143,7 +143,7 @@ public class SelectPhotosActivity extends AppCompatActivity {
         if(cm.isExtended() == false) {
 
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.plus);
-            Clothes extend = new Clothes(-1, -1, null, null, null, null, bitmap);
+            Clothes extend = new Clothes(-1, -1, "tester",null, null, null, null, bitmap);
             wardrobe.add(extend);
             cm.setExtended(true);
         }
@@ -161,12 +161,13 @@ public class SelectPhotosActivity extends AppCompatActivity {
                     {   Toast.makeText(getApplicationContext(),"deselected " +String.valueOf(position),Toast.LENGTH_SHORT).show();
                         view.findViewById(R.id.select_clothes_item).setAlpha(1);
                         Log.e("calendar","num"+String.valueOf(position));
-                        selected.remove(wardrobe.get(position).getID());
+                        selected.remove((Integer)wardrobe.get(position).getID());
+
                     }
                     else{
                         Toast.makeText(getApplicationContext(),"selected " +String.valueOf(position),Toast.LENGTH_SHORT).show();
                         view.findViewById(R.id.select_clothes_item).setAlpha(0.4f);
-                        selected.add(wardrobe.get(position).getID());
+                        selected.add((Integer)(wardrobe.get(position).getID()));
                     }
                 }
                 else{

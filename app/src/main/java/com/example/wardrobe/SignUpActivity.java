@@ -34,9 +34,9 @@ public class SignUpActivity extends AppCompatActivity {
 
 
 
-    private String username,passwd,nickname,md5passwd;
+    private String username,passwd,email,md5passwd;
 
-    private EditText usrnameInput,passwdInput,nicknameInput;
+    private EditText usrnameInput,emailInput,passwdInput;
     private Button submitButton,returnButton;
 
     private String TAG = "sign_up";
@@ -86,6 +86,24 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        emailInput = (EditText) findViewById(R.id.sign_up_email);
+        emailInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+               email = emailInput.getText().toString().trim();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         passwdInput = (EditText) findViewById(R.id.sign_up_password);
         passwdInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -104,23 +122,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        nicknameInput = (EditText) findViewById(R.id.sign_up_nickname);
-        nicknameInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                nickname = nicknameInput.getText().toString().trim();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
 
         submitButton = (Button) findViewById(R.id.sign_up_submit);
 
@@ -128,33 +130,33 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(SignUpActivity.this,"提交中..",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "提交中..", Toast.LENGTH_SHORT).show();
 
-                usrnameInput.setEnabled(false);
-                passwdInput.setEnabled(false);
-                nicknameInput.setEnabled(false);
+                    usrnameInput.setEnabled(false);
+                    passwdInput.setEnabled(false);
+                    emailInput.setEnabled(false);
 
-                boolean result = signupResult(username,passwd,nickname);
+                    boolean result = signupResult(username, passwd);
 
 
-                if(result){
-                    Toast.makeText(SignUpActivity.this,"注册成功！请登录。",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getBaseContext(), SigninActivity.class);
-                    startActivity(intent);
-                    finish();
+                    if (result) {
+                        Toast.makeText(SignUpActivity.this, "注册成功！请登录。", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getBaseContext(), SigninActivity.class);
+                        startActivity(intent);
+                        finish();
 
+                    } else {
+                        Toast.makeText(SignUpActivity.this, "注册失败！", Toast.LENGTH_SHORT).show();
+
+                        usrnameInput.setEnabled(true);
+                        passwdInput.setEnabled(true);
+                        emailInput.setEnabled(true);
+                    }
                 }
-                else{
-                    Toast.makeText(SignUpActivity.this,"注册失败！",Toast.LENGTH_SHORT).show();
-
-                    usrnameInput.setEnabled(true);
-                    passwdInput.setEnabled(true);
-                    nicknameInput.setEnabled(true);
-                }
 
 
 
-            }
+
         });
 
         returnButton = (Button) findViewById(R.id.sign_up_return);
@@ -170,21 +172,21 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-    private boolean signupResult(String un, String pw,String nn){
+    private boolean signupResult(String un, String pw){
         JSONObject response = null;
         //build json requests
         try {
             JSONObject a = new JSONObject();
             a.put("username", username);
             a.put("password", passwd);
-            a.put("nickname",nickname);
+            a.put("email",email);
 
             //connect to server
-            response = new netConnector("authentication/sign_up/", "POST", a).call();
+            response = new netConnector("authentication/register", "POST", a).call();
 
             if(response != null) {
                 String status = response.getString("status");
-                Toast.makeText(SignUpActivity.this,response.getString("message"),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SignUpActivity.this,response.getString("message"),Toast.LENGTH_SHORT).show();
 
                 if(status.equals("000")) return true;
             }
